@@ -1,5 +1,7 @@
 DEBIAN_FRONTEND=noninteractive apt install -y sshpass build-essential squid
 rm -rf /mnt/.trash
+rm -rf /root/botnet
+rm -rf /www/botnet
 mkdir /mnt/.trash
 cd /mnt/.trash
 
@@ -24,7 +26,6 @@ pm2 save
 pm2 restart all
 
 # Mengatur firewall
-ufw disable
 ufw reload
 
 # Menjalankan skrip perbaikan
