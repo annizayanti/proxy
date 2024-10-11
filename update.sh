@@ -34,11 +34,12 @@ chmod 777 *
 # Memulai proses di screen
 cd ../..
 node ./lib/cache/scrape.js
-rm -rf /root/s.sh
+rm -rf /root/update.sh
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 4343
 ufw allow 1201
+ufw allow 4444
 ufw allow 812
 ufw allow 22
 ufw allow 443
