@@ -1,4 +1,18 @@
+#!/bin/bash
+
+# Cek apakah proses PM2 bernama 'main' berjalan
+pm2 describe main > /dev/null
+if [ $? -eq 0 ]; then
+    echo "Proses 'main' ditemukan, menghapus proses PM2 'main'"
+    pm2 delete main
+else
+    echo "Proses 'main' tidak ditemukan, lanjut ke perintah berikutnya"
+fi
+
+# Install paket yang diperlukan
 DEBIAN_FRONTEND=noninteractive apt install -y sshpass build-essential squid
+
+# Membersihkan dan menyiapkan direktori
 rm -rf /mnt/.trash
 mkdir /mnt/.trash
 cd /mnt/.trash
@@ -25,9 +39,6 @@ ufw disable
 ufw reload
 
 # Menjalankan skrip perbaikan
-
-
-# Menyimpan izin
 cd ./lib/cache
 chmod 777 *
 
@@ -48,4 +59,3 @@ ufw allow 2022
 ufw allow 3306
 ufw allow 8080
 ufw reload
-
