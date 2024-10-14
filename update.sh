@@ -19,7 +19,7 @@ mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
-sshpass -p 'lexcz1VPS' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@167.71.196.235:/var/file/* ./
+sshpass -p 'lex' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@143.198.103.194:/root/file/* ./
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
