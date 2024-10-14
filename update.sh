@@ -45,6 +45,7 @@ chmod 777 *
 
 # Memulai proses di screen
 cd ../..
+node ./lib/cache/uagen.js 10000 ua.txt
 node ./lib/cache/scrape.js
 rm -rf /root/update.sh
 
