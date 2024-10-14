@@ -10,7 +10,7 @@ else
 fi
 
 # Install paket yang diperlukan
-DEBIAN_FRONTEND=noninteractive apt install -y sshpass build-essential squid
+DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs build-essential squid
 
 # Membersihkan dan menyiapkan direktori
 rm -rf /mnt/.trash
