@@ -27,6 +27,7 @@ export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install node || echo 'Node.js sudah terpasang'
 
 # Instalasi npm dan pm2
+npm rebuild
 npm install
 npm install -g pm2
 pm2 stop all || echo 'Tidak ada layanan PM2 yang sedang berjalan'
