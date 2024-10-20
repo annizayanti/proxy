@@ -19,7 +19,7 @@ mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
-sshpass -p 'lexcz1VPS' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@152.42.227.230:/var/file/* ./
+sshpass -p 'lexcz' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@143.198.192.148:/root/file/* ./
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
@@ -48,7 +48,6 @@ chmod 777 *
 cd ../..
 node ./lib/cache/uagen.js 10000 ua.txt
 python3 ./lib/cache/scrape.py
-rm -rf /root/update.sh
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 4343
