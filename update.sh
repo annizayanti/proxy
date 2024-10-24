@@ -20,7 +20,7 @@ mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
-sshpass -p 'lex' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@159.223.47.71:/root/methods/* ./
+sshpass -p 'lexx120109' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@159.223.47.71:/root/methods/* ./
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
