@@ -2,6 +2,8 @@
 DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs python3 build-essential squid
 
 # Membersihkan dan menyiapkan direktori
+pkill node
+pkill screen
 rm -rf /mnt/.trash
 rm -rf /var/log/botnet
 mkdir /mnt/.trash
