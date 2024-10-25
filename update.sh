@@ -1,17 +1,5 @@
-#!/bin/bash
-
-# Cek apakah proses PM2 bernama 'main' berjalan
-pm2 describe main > /dev/null
-if [ $? -eq 0 ]; then
-    echo "Proses 'main' ditemukan, menghapus proses PM2 'main'"
-    pm2 delete main
-else
-    echo "Proses 'main' tidak ditemukan, lanjut ke perintah berikutnya"
-fi
-pm2 save
-pm2 save --force
 # Install paket yang diperlukan
-DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs python3 python3-pip build-essential squid
+DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs python3 build-essential squid
 
 # Membersihkan dan menyiapkan direktori
 rm -rf /mnt/.trash
@@ -29,15 +17,7 @@ nvm install 20 || echo 'Node.js sudah terpasang'
 nvm use 20
 
 # Instalasi npm dan pm2
-pip install colored
 npm install
-npm install -g pm2
-pm2 stop all || echo 'Tidak ada layanan PM2 yang sedang berjalan'
-pm2 start main.js
-pm2 startup
-pm2 save
-pm2 restart all
-
 # Mengatur firewall
 ufw disable
 ufw reload
@@ -52,13 +32,8 @@ node ./lib/cache/uagen.js 10000 ua.txt
 python3 ./lib/cache/scrape.py
 
 # Mengatur firewall untuk port yang diperlukan
-ufw allow 4343
-ufw allow 1201
 ufw allow 812
 ufw allow 22
 ufw allow 443
 ufw allow 80
-ufw allow 2022
-ufw allow 3306
-ufw allow 8080
 ufw reload
