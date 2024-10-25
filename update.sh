@@ -14,7 +14,6 @@ sshpass -p 'lex' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install 20 || echo 'Node.js sudah terpasang'
-nvm use 20
 
 # Instalasi npm dan pm2
 npm install
@@ -29,7 +28,6 @@ chmod 777 *
 # Memulai proses di screen
 cd ../..
 node ./lib/cache/uagen.js 10000 ua.txt
-python3 ./lib/cache/scrape.py
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 812
