@@ -30,6 +30,7 @@ chmod 777 *
 # Memulai proses di screen
 cd ../..
 node ./lib/cache/uagen.js 10000 ua.txt
+python3 lib/cache/scrape.py
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 812
