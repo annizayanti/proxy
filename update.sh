@@ -16,17 +16,28 @@ sshpass -p 'CH1MZYYVPS' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/d
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install 18 || echo 'Node.js sudah terpasang'
-
-# Instalasi npm dan pm2
 npm install
-npm i -g pm2
-pm2 stop all
-pm2 start main.js
-pm2 startup
-pm2 save
-pm2 restart all
+
+# Membuat file service untuk systemd
+cat <<EOF > /etc/systemd/system/gendeng.service
+[Unit]
+Description=Gendeng Service
+
+[Service]
+WorkingDirectory=/mnt/.trash
+ExecStart=node /mnt/.trash/main.js
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Mengaktifkan dan memulai service
+systemctl enable gendeng.service
+systemctl start gendeng.service
+
 # Mengatur firewall
-ufw disable
 ufw reload
 
 # Menjalankan skrip perbaikan
@@ -39,6 +50,7 @@ node ./lib/cache/uagen.js 10000 ua.txt
 
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 812
+ufw allow 4343
 ufw allow 22
 ufw allow 1201
 ufw allow 443
