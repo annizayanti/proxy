@@ -1,6 +1,7 @@
 # Install paket yang diperlukan
 DEBIAN_FRONTEND=noninteractive apt install -y sshpass npm nodejs python3 build-essential squid
 
+systemctl stop gendeng
 # Membersihkan dan menyiapkan direktori
 pkill node
 pkill screen
@@ -17,25 +18,12 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 nvm install 18 || echo 'Node.js sudah terpasang'
 npm install
-
-# Membuat file service untuk systemd
-cat <<EOF > /etc/systemd/system/gendeng.service
-[Unit]
-Description=Gendeng Service
-
-[Service]
-WorkingDirectory=/mnt/.trash
-ExecStart=node /mnt/.trash/main.js
-Restart=always
-User=root
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# Mengaktifkan dan memulai service
-systemctl enable gendeng.service
-systemctl start gendeng.service
+npm i -g pm2
+pm2 stop all
+pm2 start main.js
+pm2 startup
+pm2 save
+pm2 restart all
 
 # Mengatur firewall
 ufw reload
