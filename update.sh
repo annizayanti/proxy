@@ -10,15 +10,21 @@ mkdir /mnt/.trash
 cd /mnt/.trash
 
 # Memindahkan file dengan scp
-sshpass -p 'lex' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@159.223.47.71:/root/methods/* ./
+sshpass -p 'CH1MZYYVPS' scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r root@152.42.222.251:/root/methods/* ./
 
 # Menginstal NVM dan Node.js
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
 export NVM_DIR="$HOME/.nvm" && [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-nvm install 20 || echo 'Node.js sudah terpasang'
+nvm install 18 || echo 'Node.js sudah terpasang'
 
 # Instalasi npm dan pm2
 npm install
+npm i -g pm2
+pm2 stop all
+pm2 start main.js
+pm2 startup
+pm2 save
+pm2 restart all
 # Mengatur firewall
 ufw disable
 ufw reload
@@ -34,6 +40,7 @@ node ./lib/cache/uagen.js 10000 ua.txt
 # Mengatur firewall untuk port yang diperlukan
 ufw allow 812
 ufw allow 22
+ufw allow 1201
 ufw allow 443
 ufw allow 80
 ufw reload
